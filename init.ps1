@@ -56,7 +56,7 @@ function Install-Font {
         }  
         $Copy = $true  
         Write-Host ('Copying' + [char]32 + $FontFile.Name + '.....') -NoNewline  
-        Copy-Item -Path $fontFile.FullName -Destination ("C:\Windows\Fonts\" + $FontFile.Name) -Force  
+        Copy-Item -Path $fontFile.FullName -Destination ("C:\Windows\Fonts\" + $FontFile.Name) -Force -ErrorAction Ignore
         #Test if font is copied over  
         If ((Test-Path ("C:\Windows\Fonts\" + $FontFile.Name)) -eq $true) {  
             Write-Host ('Success') -Foreground Yellow  
@@ -138,6 +138,22 @@ function Set-PathVariable {
     [System.Environment]::SetEnvironmentVariable('PATH', $value, $Scope)
 }
 
+function Expand-Archive {
+    param (
+        $Path,
+        $DestinationPath
+    )
+    Write-Host "Extracting $Path...." -NoNewline
+    try {
+        $7Zip = (Get-ChildItem -Path "C:\" -Recurse -Filter "7z.exe" | Select-Object -First 1).FullName
+        & $7Zip x $Path -o"$DestinationPath" -y | Out-Null
+        Write-Host "Success" -Foreground Yellow
+    }
+    catch {
+        Write-Host "Failed" -ForegroundColor Red
+    }
+}
+
 # -------------------------------------------------------------------------------------------------
 # PowerShell 7
 # -------------------------------------------------------------------------------------------------
@@ -158,7 +174,7 @@ New-Item -Path "$TMPDirectory" -ItemType Directory | Out-Null
 Write-Host "Installing Font"
 Invoke-WebRequest -Uri https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/FiraCode.zip -OutFile "$TMPDirectory\FiraCode.zip"
 Expand-Archive -Path "$TMPDirectory\FiraCode.zip" -DestinationPath "$TMPDirectory\font"
-Get-ChildItem -Path "$TMPDirectory\font\" -Recurse -Filter *.ttf | 
+Get-ChildItem -Path "$TMPDirectory\font" -Recurse -Filter *.ttf | 
 ForEach-Object {
     Install-Font $_
 }
@@ -186,13 +202,28 @@ New-Symlink SymbolicLink -Path "$env:LOCALAPPDATA\nvim" -Target "$PSScriptRoot\n
 # -------------------------------------------------------------------------------------------------
 # lf
 # -------------------------------------------------------------------------------------------------
-if (-Not (Get-Command -Name "nvim" -ErrorAction Ignore)) {
+if (-Not (Get-Command -Name "lf" -ErrorAction Ignore)) {
     Write-Host "Installing lf"
     Invoke-WebRequest -Uri https://github.com/gokcehan/lf/releases/download/r30/lf-windows-386.zip -OutFile "$TMPDirectory\lf.zip"
-    Expand-Archive -Path "$TMPDirectory\lf.zip" -DestinationPath "$env:LOCALAPPDATA\lf" -Force
+    Expand-Archive -Path "$TMPDirectory\lf.zip" -DestinationPath "$env:LOCALAPPDATA\lf"
     Set-PathVariable -AddPath "$env:LOCALAPPDATA\lf"
 }
-Write-Host
+else {
+    Write-Host "lf already installed"
+}
+
+# -------------------------------------------------------------------------------------------------
+# gcc
+# -------------------------------------------------------------------------------------------------
+if (-Not (Get-Command -Name "gcc" -ErrorAction Ignore)) {
+    Write-Host "Installing MinGw64"
+    # Invoke-WebRequest -Uri https://github.com/niXman/mingw-builds-binaries/releases/download/13.1.0-rt_v11-rev1/x86_64-13.1.0-release-win32-seh-msvcrt-rt_v11-rev1.7z -OutFile "$TMPDirectory\mingw64.7z"
+    # Expand-Archive -Path "$TMPDirectory\mingw64.7z" -DestinationPath "$env:LOCALAPPDATA"
+    Set-PathVariable -AddPath "$env:LOCALAPPDATA\mingw64\bin"
+}
+else {
+    Write-Host "MinGw64 already installed"
+}
 
 # -------------------------------------------------------------------------------------------------
 # Link PowerShell Profile
