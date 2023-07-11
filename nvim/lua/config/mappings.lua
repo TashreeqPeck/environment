@@ -19,3 +19,8 @@ keymap("i", "<C-k>", "<Up>", "Move down")
 -- go to beginning and end
 keymap("i", "<C-b>", "<ESC>^i", "Beginning of line")
 keymap("i", "<C-e>", "<End>", "End of line")
+
+-------------------------------------------------------------------------------
+-- NORMAL MODE --
+-------------------------------------------------------------------------------
+keymap("n", "<leader>l", ":Lazy<CR>", "Open Lazy Info")
