@@ -21,7 +21,7 @@ function New-Symlink {
 
     try {
         Write-Host "Removing old symlink...." -NoNewline
-        Remove-Item $Path -Recurse
+        Remove-Item $Path -Recurse -ErrorAction SilentlyContinue
         Write-Host "Success" -Foreground Yellow
     }
     catch {
