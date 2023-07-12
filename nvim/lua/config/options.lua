@@ -4,6 +4,7 @@ local options = {
     expandtab = true, --convert tabs to spaces
     shiftwidth = 4, -- number of spaces for each indent
     tabstop = 4, -- insert 4 spaces for a tab
+    clipboard = "unnamedplus" -- use system clipboard
 }
 
 for key, value in pairs(options) do
