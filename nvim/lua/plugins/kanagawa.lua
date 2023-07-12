@@ -1,7 +1,13 @@
 return {
     "rebelot/kanagawa.nvim",
-    config = function()
-        vim.cmd("colorscheme kanagawa-dragon")
+    opts = {
+        background = {
+            dark = "dragon"
+        },
+    },
+    config = function(_, opts)
+        require("kanagawa").setup(opts)
+        vim.cmd("colorscheme kanagawa")
     end,
 }
 
