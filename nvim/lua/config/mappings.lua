@@ -23,4 +23,11 @@ keymap("i", "<C-e>", "<End>", "End of line")
 -------------------------------------------------------------------------------
 -- NORMAL MODE --
 -------------------------------------------------------------------------------
-keymap("n", "<leader>l", ":Lazy<CR>", "Open Lazy Info")
+
+-- navigate windows
+keymap("n", "<C-h>", "<C-w>h", "Window left")
+keymap("n", "<C-j>", "<C-w>j", "Window down")
+keymap("n", "<C-k>", "<C-w>k", "Window up")
+keymap("n", "<C-l>", "<C-w>l", "Window right")
+
+
