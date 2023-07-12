@@ -1,3 +1,4 @@
+-- set vim options
 local options = {
     number = true, -- enable line numbers
     cursorline = true, -- highlight the current line
@@ -10,4 +11,3 @@ local options = {
 for key, value in pairs(options) do
     vim.opt[key] = value
 end
-

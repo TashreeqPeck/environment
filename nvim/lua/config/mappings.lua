@@ -1,33 +1,25 @@
--- shorten funciton name
-local keymap = require("utils").keymap
+local M = {}
 
--- map <leader> to <space>
-keymap("", "<Space>", "<Nop>")
-vim.g.mapleader = " "
-vim.g.maplocalleader = " "
+M.general = {
+  i = {
+    -- go to  beginning and end
+    ["<C-b>"] = { "<ESC>^i", "Beginning of line" },
+    ["<C-e>"] = { "<End>", "End of line" },
 
--------------------------------------------------------------------------------
--- INSERT MODE --
--------------------------------------------------------------------------------
+    -- navigate within insert mode
+    ["<C-h>"] = { "<Left>", "Move left" },
+    ["<C-l>"] = { "<Right>", "Move right" },
+    ["<C-j>"] = { "<Down>", "Move down" },
+    ["<C-k>"] = { "<Up>", "Move up" },
+  },
+  
+  n = {
+     -- switch between windows
+    ["<C-h>"] = { "<C-w>h", "Window left" },
+    ["<C-l>"] = { "<C-w>l", "Window right" },
+    ["<C-j>"] = { "<C-w>j", "Window down" },
+    ["<C-k>"] = { "<C-w>k", "Window up" },
+  },
+}
 
--- navigate within insert mode
-keymap("i", "<C-h>", "<Left>", "Move left")
-keymap("i", "<C-l>", "<Right>", "Move right")
-keymap("i", "<C-j>", "<Down>", "Move down")
-keymap("i", "<C-k>", "<Up>", "Move down")
-
--- go to beginning and end
-keymap("i", "<C-b>", "<ESC>^i", "Beginning of line")
-keymap("i", "<C-e>", "<End>", "End of line")
-
--------------------------------------------------------------------------------
--- NORMAL MODE --
--------------------------------------------------------------------------------
-
--- navigate windows
-keymap("n", "<C-h>", "<C-w>h", "Window left")
-keymap("n", "<C-j>", "<C-w>j", "Window down")
-keymap("n", "<C-k>", "<C-w>k", "Window up")
-keymap("n", "<C-l>", "<C-w>l", "Window right")
-
-
+return M
