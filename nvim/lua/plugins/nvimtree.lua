@@ -4,6 +4,9 @@ return {
     dependencies = {
         "nvim-tree/nvim-web-devicons",
     },
+    init = function()
+        require("utils").load_mappings("nvimtree")
+    end,
     opts = {
         disable_netrw = true,
         hijack_netrw = true,
