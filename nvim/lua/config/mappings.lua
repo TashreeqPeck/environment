@@ -30,4 +30,12 @@ M.nvimtree = {
     },
 }
 
+M.lazygit = {
+    plugin = true,
+    n = {
+        ["<leader>gg"] = { "<cmd> LazyGit <CR>", "Open Lazy Git" },
+        ["<leader>gf"] = { "<cmd> LazyGitFilter <CR>", "View Git Commits" },
+    },
+}
+
 return M
