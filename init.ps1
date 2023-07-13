@@ -304,6 +304,7 @@ Write-Host
 # -------------------------------------------------------------------------------------------------
 # Link PowerShell Profile
 # -------------------------------------------------------------------------------------------------
+Write-Host "Create Powershell profile symlink"
 $ProfilePath = $PROFILE -replace "\\(?:.(?!\\))+$"
 New-Symlink -Path "$ProfilePath\profile.ps1" -Target "$PSScriptRoot\PowerShell\profile.ps1" 
 
