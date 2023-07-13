@@ -233,11 +233,6 @@ ForEach-Object {
 # Neovim
 # -------------------------------------------------------------------------------------------------
 Install-WinGet -Name "nvim" -FriendlyName "Neovim" -Package Neovim.Neovim
-# if (-Not (Get-Command -Name "nvim" -ErrorAction Ignore)) {
-#     Write-Host "Installing Neovim"
-#     winget install Neovim.Neovim
-# }
-# Write-Host "Adding Neovim config...."
 New-Symlink SymbolicLink -Path "$env:LOCALAPPDATA\nvim" -Target "$PSScriptRoot\nvim"
 
 # -------------------------------------------------------------------------------------------------
@@ -258,17 +253,8 @@ New-Symlink SymbolicLink -Path "$env:LOCALAPPDATA\nvim" -Target "$PSScriptRoot\n
 # -------------------------------------------------------------------------------------------------
 # LazyGit
 # -------------------------------------------------------------------------------------------------
-# Install-Binary -Name "lazygit" -FriendlyName "LazyGit" -Uri https://github.com/jesseduffield/lazygit/releases/download/v0.38.2/lazygit_0.38.2_Windows_x86_64.zip
-# if (-Not (Get-Command -Name "lazygit" -ErrorAction Ignore)) {
-#     Write-Host "Installing LazyGit"
-#     Invoke-WebRequest -Uri https://github.com/jesseduffield/lazygit/releases/download/v0.38.2/lazygit_0.38.2_Windows_x86_64.zip -OutFile "$TMPDirectory\lazygit.zip"
-#     Expand-Archive -Path "$TMPDirectory\lazygit.zip" -DestinationPath "$env:LOCALAPPDATA\lazygit"
-#     Set-PathVariable -AddPath "$env:LOCALAPPDATA\lazygit"
-# }
-# else {
-#     Write-Host "LazyGit already installed"
-# }
-# Write-Host
+Install-Binary -Name "lazygit" -FriendlyName "LazyGit" -Uri https://github.com/jesseduffield/lazygit/releases/download/v0.38.2/lazygit_0.38.2_Windows_x86_64.zip
+Write-Host
 
 # -------------------------------------------------------------------------------------------------
 # gcc
