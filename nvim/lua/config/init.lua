@@ -1,4 +1,5 @@
 require("config.leader")
+require("config.autocmds")
 require("config.options")
 require("utils").load_mappings()
 require("config.lazy")

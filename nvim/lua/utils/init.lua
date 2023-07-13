@@ -1,6 +1,7 @@
 local M = {}
 local merge_tb = vim.tbl_deep_extend
 
+-- make reassigning key mappings easier
 M.load_mappings = function(section, mapping_opt)
   vim.schedule(function()
     local function set_section_map(section_values)
@@ -35,6 +36,17 @@ M.load_mappings = function(section, mapping_opt)
       set_section_map(sect)
     end
   end)
+end
+
+-- check if a modified buffer is open
+M.is_modified_buffer_open = function(buffer_name, buffers)
+    local is_open = false
+    for _, v in pairs(buffers) do
+        if v.name:match(buffer_name) == nil then
+            is_open = true
+        end
+    end
+    return is_open
 end
 
 return M
