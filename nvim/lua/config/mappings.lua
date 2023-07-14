@@ -19,6 +19,10 @@ M.general = {
         ["<C-l>"] = { "<C-w>l", "Window right" },
         ["<C-j>"] = { "<C-w>j", "Window down" },
         ["<C-k>"] = { "<C-w>k", "Window up" },
+
+        -- switch between buffers
+        ["<Tab>"] = { "<cmd> bnext <CR>", "Cycle buffers right" },
+        ["<S-Tab>"] = { "<cmd> bprev <CR>", "Cycle buffers left" },
     },
 }
 
