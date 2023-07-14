@@ -6,6 +6,7 @@ return {
     opts = {
         options = {
             separator_style = "thin",
+
             offsets = {{
                 filetype = "NvimTree",
                 text = "Explorer",
