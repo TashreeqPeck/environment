@@ -45,4 +45,13 @@ M.lazygit = {
     },
 }
 
+M.gitsigns = {
+    plugin = true,
+    n = {
+        ["<leader>gh"] = { "<cmd> Gitsigns toggle_linehl <CR>", "Toggle status highlighting" },
+        ["<leader>gd"] = { "<cmd> Gitsigns toggle_word_diff <CR>", "Toggle git word diff" },
+        ["<leader>gb"] = { "<cmd> Gitsigns toggle_current_line_blame <CR>", "Toggle git blame" },
+    },
+}
+
 return M
