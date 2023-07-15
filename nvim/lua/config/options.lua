@@ -8,6 +8,7 @@ local options = {
     tabstop = 4, -- insert 4 spaces for a tab
     clipboard = "unnamedplus", -- use system clipboard
     signcolumn = "yes", -- always show sign column
+    showmode = false, -- hide editor mode (statusline shows this)
 }
 
 for key, value in pairs(options) do

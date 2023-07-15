@@ -9,6 +9,9 @@ return {
                 ignore_focus = {
                     "NvimTree",
                 },
+                disabled_filetypes = {
+                    "lazygit",
+                },
                 globalstatus = true,
             },
         })
