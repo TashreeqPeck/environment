@@ -19,6 +19,7 @@ vim.api.nvim_create_autocmd("BufEnter", {
         local bufnr = vim.fn.bufnr("lazygit")
         if bufnr ~= -1 then
             vim.cmd("bdelete " .. bufnr)
+            vim.cmd("NvimTreeRefresh")
         end
     end
 })
