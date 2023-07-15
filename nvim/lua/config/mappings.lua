@@ -23,6 +23,9 @@ M.general = {
         -- switch between buffers
         ["<Tab>"] = { "<cmd> bnext <CR>", "Cycle buffers right" },
         ["<S-Tab>"] = { "<cmd> bprev <CR>", "Cycle buffers left" },
+
+        -- close close current buffer
+        ["<leader>bd"] = { "<cmd> bnext <CR> <cmd> bdelete # <CR>", "Close current buffer" },
     },
 }
 
