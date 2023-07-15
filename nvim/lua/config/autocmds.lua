@@ -11,3 +11,13 @@ vim.api.nvim_create_autocmd("BufEnter", {
         end
     end
 })
+
+vim.api.nvim_create_autocmd("BufEnter", {
+    nested = true,
+    callback = function()
+        local bufnr = vim.fn.bufnr("lazygit")
+        if bufnr ~= -1 then
+            vim.cmd("bdelete " .. bufnr)
+        end
+    end
+})
