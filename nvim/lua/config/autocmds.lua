@@ -12,6 +12,7 @@ vim.api.nvim_create_autocmd("BufEnter", {
     end
 })
 
+-- delete lazygit buffer when finished
 vim.api.nvim_create_autocmd("BufEnter", {
     nested = true,
     callback = function()
