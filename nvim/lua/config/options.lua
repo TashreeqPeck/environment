@@ -1,7 +1,7 @@
 -- set vim options
 local options = {
     number = true, -- enable line numbers
-    relativenumber = true -- enable relative line numbers
+    relativenumber = true, -- enable relative line numbers
     cursorline = true, -- highlight the current line
     expandtab = true, --convert tabs to spaces
     shiftwidth = 4, -- number of spaces for each indent
