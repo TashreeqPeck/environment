@@ -17,7 +17,7 @@ vim.api.nvim_create_autocmd("BufEnter", {
     nested = true,
     callback = function()
         local bufnr = vim.fn.bufnr("lazygit")
-        if bufnr ~= -1 then
+        if bufnr ~= -1 and vim.fn.bufname("lazygit"):match("term") ~= nil then
             vim.cmd("bdelete " .. bufnr)
             vim.cmd("NvimTreeRefresh")
         end
