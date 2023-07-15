@@ -38,15 +38,14 @@ M.load_mappings = function(section, mapping_opt)
   end)
 end
 
--- check if a modified buffer is open
-M.is_modified_buffer_open = function(buffer_name, buffers)
-    local is_open = false
-    for _, v in pairs(buffers) do
-        if v.name:match(buffer_name) == nil then
-            is_open = true
+-- check if given modified buffer is open
+M.is_modified_buffer_open = function(exclude_buffer)
+    for _, buffer in pairs(vim.fn.getbufinfo({ bufmodified = 1 })) do
+        if buffer.name:match(exclude_buffer) == nil then
+            return true
         end
     end
-    return is_open
+    return false
 end
 
 return M
