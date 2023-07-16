@@ -114,6 +114,28 @@ function Install-Font {
     Write-Host  
 }
 
+function Install-Fonts {
+    param (
+      $FontName,
+      $DownloadPath,
+      $ExtractPath,
+      $Uri
+    )
+    if (Test-Path "C:\Windows\Fonts\*$FontName*") {
+        Write-Host "Font $FontName already installed"
+        Write-Host
+    }
+    else {
+        Write-Host "Installing Font $FontName"
+        Invoke-WebRequest -Uri $Uri -OutFile "$DownloadPath\$FontName.zip"
+        Expand-Archive -Path "$DownloadPath\$FontName.zip" -DestinationPath "$ExtractPath\$FontName"
+        Get-ChildItem -Path "$ExtractPath\$FontName" -Recurse -Filter *.ttf |
+        ForEach-Object {
+            Install-Font $_
+        }
+    }
+}
+
 function Set-PathVariable {
     param (
         [string]$AddPath,
@@ -210,13 +232,7 @@ New-Item -Path "$TMPDirectory" -ItemType Directory | Out-Null
 # -------------------------------------------------------------------------------------------------
 # Install Font (FiraCode Nerd Font)
 # -------------------------------------------------------------------------------------------------
-Write-Host "Installing Font"
-Invoke-WebRequest -Uri https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/FiraCode.zip -OutFile "$TMPDirectory\FiraCode.zip"
-Expand-Archive -Path "$TMPDirectory\FiraCode.zip" -DestinationPath "$TMPDirectory\font"
-Get-ChildItem -Path "$TMPDirectory\font" -Recurse -Filter *.ttf | 
-ForEach-Object {
-    Install-Font $_
-}
+Install-Fonts -FontName "FiraCode" -DownloadPath $TMPDirectory -ExtractPath $TMPDirectory -Uri https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/FiraCode.zip
 
 # -------------------------------------------------------------------------------------------------
 # Starship
