@@ -194,7 +194,6 @@ function Install-Binary {
     else {
         Write-Host "$FriendlyName already installed"
     }
-    Write-Host
 }
 
 function Install-WinGet {
@@ -211,8 +210,6 @@ function Install-WinGet {
     else {
         Write-Host "$FriendlyName already installed"
     }
-    Write-Host
-    
 }
 
 # -------------------------------------------------------------------------------------------------
@@ -222,6 +219,7 @@ if (-Not (Get-Command -Name "pwsh" -ErrorAction Ignore)) {
     winget install --id Microsoft.Powershell
 }
 Invoke-RunAsAdministrator
+Write-Host
 
 # -------------------------------------------------------------------------------------------------
 # Create tmp directory
@@ -270,6 +268,7 @@ New-Symlink SymbolicLink -Path "$env:LOCALAPPDATA\nvim" -Target "$PSScriptRoot\n
 # LazyGit
 # -------------------------------------------------------------------------------------------------
 Install-Binary -Name "lazygit" -FriendlyName "LazyGit" -Uri https://github.com/jesseduffield/lazygit/releases/download/v0.38.2/lazygit_0.38.2_Windows_x86_64.zip
+New-Symlink SymbolicLink -Path "$env:APPDATA\lazygit" -Target "$PSScriptRoot\lazygit"
 Write-Host
 
 # -------------------------------------------------------------------------------------------------
